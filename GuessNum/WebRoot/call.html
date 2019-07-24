@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>随机点名</title>
+    <style type="text/css">
+    body{
+	    text-align: center;
+	    background: orange;
+    }
+    .timers{
+    	float: right;
+        margin-right: 100px;
+        color: red;
+        font-size: 40px;
+    }
+    .classes{
+    	width:800px; 
+    	height:400px; 
+    }
+    .names{
+      width: 80px;
+      height: 30px;
+      background: yellow;
+      text-align: center;
+      float: left;
+       margin-top: 20px;
+      margin-left: 100px; 
+      line-height:180%;
+      
+    }
+    .btn{
+	    width:100px;
+	    height：30px;
+	    font-size: 20px;
+	    text-align: center;
+	    background: pink;
+    	border: none;
+    	float: left;
+    	margin-top: 150px;
+    	margin-left: 20px;
+    }
+     </style>
+    
+  </head>
+  
+  <body>
+    <h1>随机点名系统</h1>
+    <span id="timer" class="timers"></span>
+    <div id="stulist" class="classes"></div>
+    <button id="start" class="btn">开始</button>
+    <button id="end" class="btn">结束</button>
+    <script type="text/javascript">
+      //定时器
+      setInterval(function(){
+	      var d=new Date();//系统当前时间
+	      var timeText=d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	      document.getElementById("timer").innerHTML=timeText;
+      
+      }, 1000);
+      
+      var arrs=["崔雪莉","郭雪芙","嘉歆","阿芳","雪灵","老王","刘疙瘩","许大妈",
+        "韩晁","静涵","允儿","查灿灿","靓影","杨幂","李静","邓超","李伟","蓝老师"
+        ,"金枝","静恬","允儿","杨幂","晶灵","林志玲","嘉懿","流行","邓超","郭琦"
+        ,"允儿","许大妈","林妹妹","杨幂","佳思","吉玉"];
+      var divNode=document.getElementById("stulist");//大盒子
+      for (var i=0;i<arrs.length;i++) {
+		 var nameNode=document.createElement("div");//创建小盒子
+		  nameNode.innerHTML=arrs[i];
+		  nameNode.className="names";
+		  divNode.appendChild(nameNode);
+		 }
+       var t;
+      document.getElementById("start").onclick=function (){
+      //定时器
+     t=setInterval(function (){
+     
+     for (var i=0;i<arrs.length;i++) {
+      divNode.children[i].style.background="";
+     }
+         var index= Math.floor(Math.random()*arrs.length);
+         divNode.children[index].style.background="red";
+      
+      }, 200);
+      
+      
+      }
+      
+      
+      document.getElementById("end").onclick=function (){
+         clearInterval(t);
+      }
+    </script>
+  </body>
+</html>

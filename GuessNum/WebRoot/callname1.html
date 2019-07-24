@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>随机点名</title>
+    <meta charset="utf-8">
+	<meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+   <style type="text/css">
+   body{
+   		background: yellow;
+   		text-align: center;
+   		text-decoration: none;
+   }
+   .btn{
+     background:pink;
+     height: 35px;
+     width: 100px;
+     border:hidden;
+     font-size: 20px;
+     margin-top: 200px;
+     margin-left: 20px;
+   }
+   .time{
+		float: right;
+  		margin-right:10px; 
+  		color: red;
+   }
+   .names{
+     text-align: center;
+     line-height:180%;
+     font-size: 35px;
+     color: blue;
+     margin-top: 80px;
+     margin-bottom: 30px;
+   }
+   </style>
+  </head>
+  
+  <body>
+    <h1>随机点名系统</h1>
+    <span id="timer" class="time"></span>
+    <div id="names" class="names"></div>
+   <button id="start" class="btn">开始</button>
+   <button id="end" class="btn">结束</button>
+   <script type="text/javascript">
+   	var t;	//清除定时器
+   	var index;//记录随机选择数组下标
+   	var arrs=["1","2","3","4","5","6","7","8","9","10","11","12"];
+	   setInterval(function (){//定时刷新时间，每秒一次
+	   	var date=new Date();
+	   	//获取系统当前时间
+	   	var time=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+
+	       +date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+	      document.getElementById("timer").innerHTML=time;
+	   }, 1000);
+	   //开始按钮添加事件
+	  document.getElementById("start").onclick=function (){
+	 		t=setInterval(function (){
+	 			//随机抽查
+	 			if(arrs.length>0){
+		 			index=Math.floor(Math.random()*arrs.length);
+		 			document.getElementById("names").innerHTML=arrs[index];
+	 			}else{
+	 				//本轮名单已经抽查完毕,需要重新开始
+	 				document.getElementById("names").innerHTML="<a href='javascript:location.reload();'>重新开始</a>";
+	 			}
+	 		}, 100);
+	  
+	  }
+  //停止按钮添加事件
+  document.getElementById("end").onclick=function (){
+  		//为防止重复点名，删除已经点过的名单
+  		arrs.splice(index, 1);
+  		//清除定时器
+  		clearInterval(t);
+  }
+   </script>
+  </body>
+</html>

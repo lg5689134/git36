@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2.html</title>
+	<meta charset="utf-8">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+    body{
+	    background: yellow;
+	    text-align: center;
+	    text-decoration: none;
+    }
+    .box{
+    	width: 1000px;
+	    height: 300px;
+	    margin-left: 60px;
+    }
+    .names{
+    	background: pink;
+	    width: 80px;
+	    height: 25px;
+	    float:left;
+	    margin-top: 10px;
+	    margin-left: 10px;
+	    text-align: center;
+    }
+    .btn{
+	    background: red;
+	    width: 80px;
+	    height: 30px;
+    	margin-top: 30px;
+    	margin-left: 10px;
+    	border: none;
+    	font-size: 20px;
+    }
+    </style>
+  </head>
+  
+  <body>
+ 	 <h1>随机点名</h1>
+ 	 <div id="box" class="box"></div>
+ 	 <button id="start" class="btn">开始</button>
+     <button id="end" class="btn">结束</button>
+    <script type="text/javascript">
+    var t;
+    var index;
+    var arrs=["崔雪莉","郭雪芙","嘉歆"];
+        var boxNode=document.getElementById("box");
+        for(var i=0;i<arrs.length;i++){
+        	var divNode=document.createElement("div");
+        	divNode.className="names";
+        	divNode.innerHTML=arrs[i];
+        	boxNode.appendChild(divNode);
+        }
+      document.getElementById("start").onclick=function (){
+       	t=setInterval(function (){       
+	       	for(var i=0;i<arrs.length;i++){
+	       		boxNode.children[i].style.background="";
+	       	}
+	       	 index=Math.floor(Math.random()*arrs.length);
+	         boxNode.children[index].style.background="red"; 
+       }, 100);    
+      }  
+      
+       document.getElementById("end").onclick=function (){
+       		arrs.splice(index, 1);
+             clearInterval(t);
+      } 
+    </script>
+  </body>
+</html>
